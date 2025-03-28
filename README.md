@@ -48,15 +48,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [x] Commit: `Create Subscriber model struct.`
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Subscriber repository.`
+    -   [x] Commit: `Implement list_all function in Subscriber repository.`
+    -   [x] Commit: `Implement delete function in Subscriber repository.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -77,6 +77,22 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+
+> In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?
+
+In the case of BambangShop, we do not need an interface or trait for the Subscriber because there is only a single observer involved, which is the Subscriber itself. Typically, an interface or trait is useful when we plan to have multiple types of observers, allowing them to be managed in separate classes. However, in this case, a single Model struct is sufficient to handle our requirements.
+
+That being said, from a best practice perspective, defining the Subscriber as an interface can provide more flexibility in the future, ensuring better scalability and adherence to SOLID principles. By using an interface, we can easily add new subscribers without modifying existing code, making the system more maintainable and reducing dependencies.
+
+> id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case?
+
+In this case, using DashMap is necessary and more efficient than Vec for storing Subscriber data with unique IDs and URLs because DashMap provides better performance. If we use Vec, each lookup operation would have a time complexity of O(n), whereas DashMap allows lookups with O(1) complexity. This means that lookup time remains constant regardless of the number of Subscribers. As a result, DashMap not only speeds up the search process but also makes managing Subscriber data more effective and scalable, making it the better choice in this case.
+
+> When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
+
+In this case, while the Singleton pattern ensures that only one instance of an object exists, it is not sufficient to handle safe concurrent access in a multithreading context. The Singleton pattern can guarantee that only one instance of the HashMap is used, but it does not ensure safe access by multiple threads simultaneously, which could lead to race conditions.
+
+Therefore, using DashMap is essential because it supports concurrent access, ensuring that multiple threads can safely read and write data. In this case, DashMap and the Singleton pattern complement each other—Singleton ensures that only one instance exists, while DashMap guarantees thread-safe concurrency. Thus, they are not mutually exclusive but rather work together to achieve both uniqueness and safe access.
 
 #### Reflection Publisher-2
 
