@@ -65,11 +65,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
     -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -117,3 +117,23 @@ Some of the features that I find particularly helpful include the ability to sav
 This tool will be highly beneficial for my future software engineering projects as it enables efficient testing and facilitates collaboration with my team.
 
 #### Reflection Publisher-3
+
+> Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+
+In this tutorial, we are using the Push model variation of the Observer Pattern. In this approach, whenever a change occurs (such as creating, updating, or deleting data) the system immediately triggers the NotificationService. This service iterates through all subscribers and sends them the latest updates without requiring them to request the data themselves.
+
+Since the publisher actively pushes notifications to the subscribers rather than waiting for them to fetch the updates, this aligns with the Push model implementation seen in the notify function of the NotificationService.
+
+> What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+
+If we were to use the Pull model in this tutorial, there would be both advantages and disadvantages to consider.
+
+One advantage is that it can be more resource-efficient, as data is only retrieved when a subscriber explicitly requests it. This gives subscribers more control, allowing them to decide what data they need and when to fetch it, rather than being flooded with updates they might not require. Additionally, this approach simplifies the publisher’s logic since it doesn’t need to actively push updates.
+
+However, the downside is that subscribers must constantly check for updates, which can lead to higher CPU usage and increased latency in notifications. Instead of receiving updates instantly, subscribers might experience delays, especially if they don’t poll frequently enough. This could be inefficient in scenarios where real-time updates are crucial.
+
+> Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+
+If we decide not to use multi-threading in the notification process, the program will face several performance issues. Since NotificationService has to notify each subscriber sequentially, a long queue will form, leading to potential bottlenecks. This means that each notification must be fully processed before moving on to the next subscriber, significantly slowing down the entire system and increasing latency.
+
+Additionally, if a single subscriber takes longer to process the notification (e.g., due to network delays), all other subscribers will have to wait, making the program inefficient. As the number of subscribers increases, the problem worsens because the notification process becomes a major performance bottleneck, ultimately reducing scalability and responsiveness.
