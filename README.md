@@ -58,12 +58,12 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement delete function in Subscriber repository.`
     -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -95,5 +95,25 @@ In this case, while the Singleton pattern ensures that only one instance of an o
 Therefore, using DashMap is essential because it supports concurrent access, ensuring that multiple threads can safely read and write data. In this case, DashMap and the Singleton pattern complement each other—Singleton ensures that only one instance exists, while DashMap guarantees thread-safe concurrency. Thus, they are not mutually exclusive but rather work together to achieve both uniqueness and safe access.
 
 #### Reflection Publisher-2
+
+> In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+
+Separating Service and Repository from the Model in the Model-View-Controller (MVC) pattern is important to follow design principles such as the Single Responsibility Principle (SRP). In MVC, the Model is responsible for representing data, while the Repository handles data access and storage, and the Service manages business logic.
+
+By separating Service and Repository from the Model, our code becomes more maintainable and easier to understand because each component has a clear and distinct responsibility. This separation also improves testability, allowing each component to be tested independently. Additionally, it enhances flexibility and scalability, as changes to one part of the system do not directly affect the others, making modifications and future development more manageable.
+
+> What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+
+If we only use the Model without separating it into Service and Repository, we will face dependency issues between components in the system. The Model would be responsible for both data storage and business logic, violating the Single Responsibility Principle (SRP).
+
+This would make the code harder to maintain because any changes to one part could significantly affect other parts, increasing overall code complexity. Additionally, tightly coupling data management with business logic would make testing more difficult and slow down further development, as modifications could introduce unintended side effects across multiple models such as Program, Subscriber, and Notification.
+
+> Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+
+I have explored Postman, and I find it to be a very useful tool for testing web application endpoints using HTTP requests. With Postman, I can test endpoints without writing code, which makes it much easier to quickly verify the functionality of my application.
+
+Some of the features that I find particularly helpful include the ability to save requests and responses, control request headers and body, and manage cookies, which is very useful when testing authentication and session-based APIs. Additionally, the API documentation feature is extremely valuable as it allows me to easily share API documentation with my teammates.
+
+This tool will be highly beneficial for my future software engineering projects as it enables efficient testing and facilitates collaboration with my team.
 
 #### Reflection Publisher-3
